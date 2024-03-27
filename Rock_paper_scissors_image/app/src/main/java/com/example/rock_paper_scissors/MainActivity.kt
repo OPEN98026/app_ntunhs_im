@@ -37,64 +37,66 @@ class MainActivity : AppCompatActivity() {
         btnScissors = findViewById(R.id.btnScissors)
         imageView = findViewById(R.id.imageView2)
 
+        //設定電腦的隨機結果
+        //已石頭的角度會發生的結果
         btnRock.setOnClickListener  {
             val iComPlay = Random().nextInt(3)+1
 
             when(iComPlay){
                 1-> {
-                    txtCom.setText(R.string.scissors)
+                    txtCom.setText(R.string.scissors) //剪刀
                     txtResult.setText(getString(R.string.win))
                 }
                 2-> {
-                    txtCom.setText(R.string.rock)
+                    txtCom.setText(R.string.rock) //石頭
                     txtResult.setText(getString(R.string.draw))
                 }
                 3-> {
-                    txtCom.setText(R.string.paper)
+                    txtCom.setText(R.string.paper) //布
                     txtResult.setText(getString(R.string.lose))
                 }
             }
         }
         btnScissors.setOnClickListener  {
-            playGame(Choise.SCISSORS)
+            playGame(Choice.SCISSORS)
         }
         btnRock.setOnClickListener  {
-            playGame(Choise.ROCK)
+            playGame(Choice.ROCK)
         }
         btnPaper.setOnClickListener  {
-            playGame(Choise.PAPER)
+            playGame(Choice.PAPER)
         }
     }
 
-    enum class Choise {
+    enum class Choice { //列舉函數
         SCISSORS, ROCK, PAPER
     }
-    fun playGame(playerChoice: Choise)  {
-        val choises = Choise.values()
-        val computerChoise = choises[Random().nextInt(choises.size)]
+    fun playGame(playerChoice: Choice)  {
+        val choises = Choice.values()
+        val computerChoise = choises[Random().nextInt(choises.size)] //電腦的隨機結果
 
         when {
-            playerChoice == computerChoise -> {
+            playerChoice == computerChoise -> { //如果一樣則平手
                 imageView.setImageResource(getChoiceString(computerChoise))
                 txtResult.setText(R.string.draw)
-            } //三種可能的結果
-            (playerChoice == Choise.SCISSORS && computerChoise == Choise.PAPER) ||
-                    (playerChoice == Choise.ROCK && computerChoise == Choise.SCISSORS) ||
-                    (playerChoice == Choise.PAPER && computerChoise == Choise.ROCK) -> {
+            } //三種會贏的結果
+            (playerChoice == Choice.SCISSORS && computerChoise == Choice.PAPER) ||
+                    (playerChoice == Choice.ROCK && computerChoise == Choice.SCISSORS) ||
+                    (playerChoice == Choice.PAPER && computerChoise == Choice.ROCK) -> {
                     imageView.setImageResource(getChoiceString(computerChoise))
                         txtResult.setText(R.string.win)
                     }
-                    else -> {
+                    else -> { //反之不是贏的結果則輸
                         imageView.setImageResource(getChoiceString(computerChoise))
                         txtResult.setText(R.string.lose)
                     }
         }
     }
-        fun getChoiceString(choice: Choise): Int {
+        fun getChoiceString(choice: Choice): Int { //以下為圖片設定 原為string表示
         return when (choice) {
-            Choise.SCISSORS -> R.drawable.scissor
-            Choise.ROCK -> R.drawable.rock
-            Choise.PAPER -> R.drawable.paper
+            Choice.SCISSORS -> R.drawable.scissor
+            Choice.ROCK -> R.drawable.rock
+            Choice.PAPER -> R.drawable.paper
 
         }
     }
