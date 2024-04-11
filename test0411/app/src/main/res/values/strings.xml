@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">test0411</string>
+    <string-array name="bigpeople">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="childpeople">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+</resources>
